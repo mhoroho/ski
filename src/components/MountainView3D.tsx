@@ -94,14 +94,16 @@ export function MountainView3D({ data, focusTrail, onFocusHandled, selectedTrail
         sources: {
           'osm-tiles': {
             type: 'raster',
-            tiles: ['https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}.png'],
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
             tileSize: 256,
-            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>',
+            maxzoom: 17,
+            attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
           },
           'terrain-dem': {
             type: 'raster-dem',
             tiles: ['https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png'],
             tileSize: 256,
+            maxzoom: 13,
             encoding: 'terrarium',
           },
         },
