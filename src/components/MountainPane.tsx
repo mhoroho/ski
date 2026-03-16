@@ -91,8 +91,23 @@ export function MountainPane({ label, initial, trailListSide = 'right' }: Props)
         )}
       </div>
 
-      {/* Mobile: map + bottom drawer */}
+      {/* Mobile: top drawer + map */}
       <div className="flex-1 flex flex-col md:hidden min-h-0">
+        {data && (
+          <div className={`bg-slate-800 border-b border-slate-700 transition-all duration-200 ${drawerOpen ? 'max-h-48' : 'max-h-10'} overflow-hidden`}>
+            <button
+              onClick={() => setDrawerOpen(!drawerOpen)}
+              className="w-full flex items-center justify-center gap-1 py-2 text-xs text-slate-400 hover:text-slate-200"
+            >
+              <span>{drawerOpen ? '▲' : '▼'}</span>
+              <span>Trails ({data.trails.length})</span>
+            </button>
+            <div className="overflow-y-auto max-h-36 px-1">
+              <TrailList trails={data.trails} onSelect={handleTrailSelect} selectedTrail={selectedTrail} />
+            </div>
+          </div>
+        )}
+
         <div className="flex-1 relative">
           {data ? (
             <MountainView3D data={data} focusTrail={focusTrail} onFocusHandled={() => setFocusTrail(null)} selectedTrail={selectedTrail} />
@@ -116,21 +131,6 @@ export function MountainPane({ label, initial, trailListSide = 'right' }: Props)
             </div>
           )}
         </div>
-
-        {data && (
-          <div className={`bg-slate-800 border-t border-slate-700 transition-all duration-200 ${drawerOpen ? 'max-h-48' : 'max-h-10'} overflow-hidden`}>
-            <button
-              onClick={() => setDrawerOpen(!drawerOpen)}
-              className="w-full flex items-center justify-center gap-1 py-2 text-xs text-slate-400 hover:text-slate-200"
-            >
-              <span>{drawerOpen ? '▼' : '▲'}</span>
-              <span>Trails ({data.trails.length})</span>
-            </button>
-            <div className="overflow-y-auto max-h-36 px-1">
-              <TrailList trails={data.trails} onSelect={handleTrailSelect} selectedTrail={selectedTrail} />
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
