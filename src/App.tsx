@@ -40,11 +40,23 @@ function App() {
           </div>
         ) : (
           <>
-            <div className="w-1/2 flex flex-col border-r border-slate-700">
-              <MountainPane label="" trailListSide="left" />
+            {/* Desktop: side by side */}
+            <div className="hidden md:flex w-full">
+              <div className="w-1/2 flex flex-col border-r border-slate-700">
+                <MountainPane label="" trailListSide="left" />
+              </div>
+              <div className="w-1/2 flex flex-col">
+                <MountainPane label="" trailListSide="right" />
+              </div>
             </div>
-            <div className="w-1/2 flex flex-col">
-              <MountainPane label="" trailListSide="right" />
+            {/* Mobile: stacked */}
+            <div className="flex md:hidden flex-col w-full">
+              <div className="h-1/2 flex flex-col border-b border-slate-700">
+                <MountainPane label="" trailListSide="right" />
+              </div>
+              <div className="h-1/2 flex flex-col">
+                <MountainPane label="" trailListSide="right" />
+              </div>
             </div>
           </>
         )}
