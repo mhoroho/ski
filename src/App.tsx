@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MountainPane } from './components/MountainPane';
 import { ColorLegend } from './components/ColorLegend';
+import { FeedbackBar } from './components/FeedbackBar';
 
 function App() {
   const [page, setPage] = useState<'explore' | 'compare'>('explore');
@@ -50,6 +51,7 @@ function App() {
       </div>
 
       <ColorLegend />
+      <FeedbackBar />
     </div>
   );
 }
