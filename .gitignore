@@ -7,6 +7,9 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Large data files
+scripts/runs.geojson
+
 node_modules
 dist
 dist-ssr
