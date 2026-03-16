@@ -13,7 +13,7 @@ interface Props {
 }
 
 export function MountainPane({ label, initial, trailListSide = 'right' }: Props) {
-  const { data, terrain, loading, error, progress, loadMountain } = useMountainTrails();
+  const { data, loading, error, progress, loadMountain } = useMountainTrails();
   const selected = data?.mountain ?? initial ?? null;
   const [focusTrail, setFocusTrail] = useState<Trail | null>(null);
   const [selectedTrail, setSelectedTrail] = useState<Trail | null>(null);
