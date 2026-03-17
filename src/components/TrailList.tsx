@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Trail } from '../types';
 import { slopeToColor } from '../utils/color';
 
@@ -27,18 +28,45 @@ const difficultyColor: Record<string, string> = {
   unknown: 'text-slate-400',
 };
 
+type SortField = 'name' | 'peakSlope' | 'avgSlope' | 'maxSlope';
+
+function getSortFn(field: SortField, asc: boolean) {
+  return (a: Trail, b: Trail) => {
+    let cmp: number;
+    if (field === 'name') {
+      cmp = a.name.localeCompare(b.name);
+    } else {
+      cmp = a[field] - b[field];
+    }
+    return asc ? cmp : -cmp;
+  };
+}
+
 export function TrailList({ trails, onSelect, selectedTrail }: Props) {
-  const sorted = [...trails].sort((a, b) => b.peakSlope - a.peakSlope);
+  const [sortField, setSortField] = useState<SortField>('peakSlope');
+  const [sortAsc, setSortAsc] = useState(false);
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortAsc(!sortAsc);
+    } else {
+      setSortField(field);
+      setSortAsc(field === 'name'); // name defaults asc, numbers default desc
+    }
+  };
+
+  const sorted = [...trails].sort(getSortFn(sortField, sortAsc));
+  const arrow = (field: SortField) => sortField === field ? (sortAsc ? ' ▲' : ' ▼') : '';
 
   return (
     <div className="text-xs w-max">
       <table>
         <thead className="sticky top-0 bg-slate-800">
           <tr className="text-slate-400 text-left whitespace-nowrap">
-            <th className="py-0.5 px-1">Trail</th>
-            <th className="py-0.5 px-1 text-right">Pk</th>
-            <th className="py-0.5 px-1 text-right">Av</th>
-            <th className="py-0.5 px-1 text-right">Mx</th>
+            <th className="py-0.5 px-1 cursor-pointer select-none hover:text-slate-200" onClick={() => handleSort('name')}>Trail{arrow('name')}</th>
+            <th className="py-0.5 px-1 text-right cursor-pointer select-none hover:text-slate-200" onClick={() => handleSort('peakSlope')}>Pk{arrow('peakSlope')}</th>
+            <th className="py-0.5 px-1 text-right cursor-pointer select-none hover:text-slate-200" onClick={() => handleSort('avgSlope')}>Av{arrow('avgSlope')}</th>
+            <th className="py-0.5 px-1 text-right cursor-pointer select-none hover:text-slate-200" onClick={() => handleSort('maxSlope')}>Mx{arrow('maxSlope')}</th>
           </tr>
         </thead>
         <tbody>

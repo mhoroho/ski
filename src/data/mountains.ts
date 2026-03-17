@@ -67,4 +67,7 @@ export const MOUNTAINS: Mountain[] = [
   { name: "Boyne Mountain", state: "MI", lat: 45.1642, lng: -84.9361, bbox: [45.15, -84.95, 45.18, -84.92], slug: "boyne-mountain-resort" },
   // West Virginia
   { name: "Snowshoe", state: "WV", lat: 38.4089, lng: -79.9939, bbox: [38.39, -80.01, 38.43, -79.97], slug: "snowshoe-mountain" },
+  // Canada
+  { name: "Whistler Blackcomb", state: "BC", lat: 50.1163, lng: -122.9574, bbox: [50.06, -123.00, 50.16, -122.90], slug: "whistler-blackcomb" },
+  { name: "Mont Tremblant", state: "QC", lat: 46.2097, lng: -74.5856, bbox: [46.19, -74.61, 46.23, -74.56], slug: "mont-tremblant-resort" },
 ];

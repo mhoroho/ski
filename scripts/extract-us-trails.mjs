@@ -21,7 +21,9 @@ const TARGET_AREAS = [
   "Mad River Glen", "Cannon Mountain", "Wildcat Mountain", "Loon Mountain Resort",
   "Sugarloaf", "Sunday River", "Whiteface Mountain", "Gore Mountain",
   "Hunter Mountain", "Crystal Mountain", "Stevens Pass", "Mt. Bachelor",
-  "Mt. Hood Meadows", "Alyeska Resort", "Boyne Mountain Resort", "Snowshoe Mountain"
+  "Mt. Hood Meadows", "Alyeska Resort", "Boyne Mountain Resort", "Snowshoe Mountain",
+  // Canada
+  "Whistler Blackcomb", "Mont Tremblant Resort"
 ];
 
 // Normalize for matching

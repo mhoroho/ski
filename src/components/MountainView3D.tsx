@@ -51,26 +51,32 @@ function getTrailBounds(trail: Trail): maplibregl.LngLatBounds {
   return bounds;
 }
 
-/** Compute bearing from the lowest trail point to the highest.
- *  This orients the camera to "look uphill" on load. */
+/** Compute bearing from the base area to the summit area.
+ *  Uses the centroid of the bottom 25% of points as "base" and
+ *  the centroid of the top 25% as "summit" for robustness. */
 function computeInitialBearing(trails: Trail[]): number {
-  let lowestPt = { lat: 0, lng: 0, elevation: Infinity };
-  let highestPt = { lat: 0, lng: 0, elevation: -Infinity };
+  const points: { lat: number; lng: number; elevation: number }[] = [];
   for (const trail of trails) {
     for (const section of trail.sections) {
       for (const seg of section) {
-        if (seg.start.elevation < lowestPt.elevation) lowestPt = seg.start;
-        if (seg.end.elevation < lowestPt.elevation) lowestPt = seg.end;
-        if (seg.start.elevation > highestPt.elevation) highestPt = seg.start;
-        if (seg.end.elevation > highestPt.elevation) highestPt = seg.end;
+        points.push(seg.start, seg.end);
       }
     }
   }
-  if (!isFinite(lowestPt.elevation) || !isFinite(highestPt.elevation)) return 0;
-  // Bearing from low point to high point
-  const dLng = (highestPt.lng - lowestPt.lng) * Math.PI / 180;
-  const lat1 = lowestPt.lat * Math.PI / 180;
-  const lat2 = highestPt.lat * Math.PI / 180;
+  if (points.length < 4) return 0;
+  points.sort((a, b) => a.elevation - b.elevation);
+  const q = Math.max(1, Math.floor(points.length * 0.25));
+  const base = points.slice(0, q);
+  const summit = points.slice(-q);
+  const avg = (pts: typeof points) => ({
+    lat: pts.reduce((s, p) => s + p.lat, 0) / pts.length,
+    lng: pts.reduce((s, p) => s + p.lng, 0) / pts.length,
+  });
+  const b = avg(base);
+  const s = avg(summit);
+  const dLng = (s.lng - b.lng) * Math.PI / 180;
+  const lat1 = b.lat * Math.PI / 180;
+  const lat2 = s.lat * Math.PI / 180;
   const y = Math.sin(dLng) * Math.cos(lat2);
   const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
   return (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
