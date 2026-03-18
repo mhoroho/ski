@@ -1,17 +1,37 @@
 import { useState } from 'react';
+import type { Mountain } from './types';
 import { MountainPane } from './components/MountainPane';
 import { ColorLegend } from './components/ColorLegend';
 import { FeedbackBar } from './components/FeedbackBar';
+import { HomePage } from './components/HomePage';
+
+type Page = 'home' | 'explore' | 'compare';
 
 function App() {
-  const [page, setPage] = useState<'explore' | 'compare'>('explore');
+  const [page, setPage] = useState<Page>('home');
+  const [initialMountain, setInitialMountain] = useState<Mountain | undefined>();
+
+  const goToExplore = (mountain?: Mountain) => {
+    setInitialMountain(mountain);
+    setPage('explore');
+  };
 
   return (
     <div className="flex flex-col h-screen bg-sky-50 text-sky-900">
       {/* Nav bar */}
       <div className="flex items-center gap-2 px-3 py-1.5 bg-white border-b border-sky-200 shadow-sm">
         <button
-          onClick={() => setPage('explore')}
+          onClick={() => setPage('home')}
+          className={`px-3 py-1 text-xs rounded transition-colors ${
+            page === 'home'
+              ? 'bg-sky-600 text-white'
+              : 'bg-sky-100 text-sky-700 hover:bg-sky-200'
+          }`}
+        >
+          Home
+        </button>
+        <button
+          onClick={() => goToExplore()}
           className={`px-3 py-1 text-xs rounded transition-colors ${
             page === 'explore'
               ? 'bg-sky-600 text-white'
@@ -34,9 +54,11 @@ function App() {
 
       {/* Page content */}
       <div className="flex-1 flex min-h-0">
-        {page === 'explore' ? (
+        {page === 'home' ? (
+          <HomePage onSelectMountain={goToExplore} />
+        ) : page === 'explore' ? (
           <div className="w-full flex flex-col">
-            <MountainPane label="Mountain" trailListSide="right" />
+            <MountainPane label="Mountain" trailListSide="right" initial={initialMountain} />
           </div>
         ) : (
           <>
@@ -62,7 +84,7 @@ function App() {
         )}
       </div>
 
-      <ColorLegend />
+      {page !== 'home' && <ColorLegend />}
       <FeedbackBar />
     </div>
   );
