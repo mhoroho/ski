@@ -77,13 +77,8 @@ export function HomePage({ onSelectMountain }: Props) {
                     <div className="font-medium text-sm text-sky-900 group-hover:text-sky-700 truncate">
                       {m.name}
                     </div>
-                    <div className="flex items-center justify-between mt-0.5">
+                    <div className="mt-0.5">
                       <span className="text-xs text-sky-400">{m.state}</span>
-                      {m.peakSlope != null && (
-                        <span className="text-xs font-mono font-semibold" style={{ color }}>
-                          {m.peakSlope.toFixed(0)}°
-                        </span>
-                      )}
                     </div>
                   </button>
                 );

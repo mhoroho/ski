@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import type { Mountain } from './types';
 import { MountainPane } from './components/MountainPane';
 import { ColorLegend } from './components/ColorLegend';
@@ -86,6 +87,7 @@ function App() {
 
       {page !== 'home' && <ColorLegend />}
       <FeedbackBar />
+      <Analytics />
     </div>
   );
 }
