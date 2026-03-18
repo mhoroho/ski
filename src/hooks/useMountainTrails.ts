@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import type { Mountain, MountainData } from '../types';
 import { loadLocalTrails } from '../services/localTrails';
 
-const CACHE_VERSION = 8; // filter outlier coordinates from bad OpenSkiMap data
+const CACHE_VERSION = 9; // re-extracted trail data with updated elevations
 
 interface UseMountainTrailsResult {
   data: MountainData | null;
