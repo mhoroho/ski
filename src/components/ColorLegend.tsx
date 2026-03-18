@@ -11,11 +11,10 @@ export function ColorLegend() {
     { angle: '6°', pos: '85%' },
     { angle: '0°', pos: '100%' },
   ];
-  // Colors: blue → green → light green → orange → dark orange → red → dark red → purple
 
   return (
-    <div className="absolute bottom-6 right-6 z-[1000] bg-slate-900/90 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-slate-700">
-      <div className="text-xs font-semibold text-slate-300 mb-2 text-center">
+    <div className="absolute bottom-6 right-6 z-[1000] bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-sky-200">
+      <div className="text-xs font-semibold text-sky-700 mb-2 text-center">
         Slope Angle
       </div>
       <div className="flex items-stretch gap-2">
@@ -26,7 +25,7 @@ export function ColorLegend() {
             minHeight: '120px',
           }}
         />
-        <div className="flex flex-col justify-between text-xs text-slate-300">
+        <div className="flex flex-col justify-between text-xs text-sky-700">
           {labels.map((l) => (
             <span key={l.angle}>{l.angle}</span>
           ))}

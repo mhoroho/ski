@@ -31,21 +31,21 @@ export function FeedbackBar() {
   };
 
   return (
-    <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 border-t border-slate-700">
-      <span className="text-xs text-slate-400 shrink-0">Feedback:</span>
+    <div className="flex items-center gap-2 px-3 py-1.5 bg-white border-t border-sky-200 shadow-sm">
+      <span className="text-xs text-sky-500 shrink-0">Feedback:</span>
       <input
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
         placeholder="What do you think? Any bugs or suggestions?"
-        className="flex-1 px-2 py-1 text-xs bg-slate-900 border border-slate-600 rounded text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        className="flex-1 px-2 py-1 text-xs bg-sky-50 border border-sky-300 rounded text-sky-900 placeholder-sky-400 focus:outline-none focus:ring-1 focus:ring-sky-500"
         disabled={status === 'sending'}
       />
       <button
         onClick={handleSubmit}
         disabled={status === 'sending' || !message.trim()}
-        className="px-3 py-1 text-xs rounded bg-blue-600 text-white hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0"
+        className="px-3 py-1 text-xs rounded bg-sky-600 text-white hover:bg-sky-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0"
       >
         {status === 'sending' ? 'Sending...' : status === 'sent' ? 'Thanks!' : status === 'error' ? 'Failed' : 'Send'}
       </button>

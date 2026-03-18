@@ -7,15 +7,15 @@ function App() {
   const [page, setPage] = useState<'explore' | 'compare'>('explore');
 
   return (
-    <div className="flex flex-col h-screen bg-slate-900 text-white">
+    <div className="flex flex-col h-screen bg-sky-50 text-sky-900">
       {/* Nav bar */}
-      <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 border-b border-slate-700">
+      <div className="flex items-center gap-2 px-3 py-1.5 bg-white border-b border-sky-200 shadow-sm">
         <button
           onClick={() => setPage('explore')}
           className={`px-3 py-1 text-xs rounded transition-colors ${
             page === 'explore'
-              ? 'bg-blue-600 text-white'
-              : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+              ? 'bg-sky-600 text-white'
+              : 'bg-sky-100 text-sky-700 hover:bg-sky-200'
           }`}
         >
           Explore
@@ -24,8 +24,8 @@ function App() {
           onClick={() => setPage('compare')}
           className={`px-3 py-1 text-xs rounded transition-colors ${
             page === 'compare'
-              ? 'bg-blue-600 text-white'
-              : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+              ? 'bg-sky-600 text-white'
+              : 'bg-sky-100 text-sky-700 hover:bg-sky-200'
           }`}
         >
           Compare
@@ -42,7 +42,7 @@ function App() {
           <>
             {/* Desktop: side by side */}
             <div className="hidden md:flex w-full">
-              <div className="w-1/2 flex flex-col border-r border-slate-700">
+              <div className="w-1/2 flex flex-col border-r border-sky-200">
                 <MountainPane label="" trailListSide="left" />
               </div>
               <div className="w-1/2 flex flex-col">
@@ -51,7 +51,7 @@ function App() {
             </div>
             {/* Mobile: stacked */}
             <div className="flex md:hidden flex-col w-full">
-              <div className="h-1/2 flex flex-col border-b border-slate-700">
+              <div className="h-1/2 flex flex-col border-b border-sky-200">
                 <MountainPane label="" trailListSide="right" />
               </div>
               <div className="h-1/2 flex flex-col">

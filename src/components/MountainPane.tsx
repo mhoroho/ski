@@ -35,7 +35,7 @@ export function MountainPane({ label, initial, trailListSide = 'right' }: Props)
 
   return (
     <div className="flex flex-col h-full">
-      <div className="p-3 bg-slate-800 border-b border-slate-700">
+      <div className="p-3 bg-white border-b border-sky-200 shadow-sm">
         <div className="flex items-end gap-2">
           <div className="flex-1">
             <MountainSearch
@@ -46,7 +46,7 @@ export function MountainPane({ label, initial, trailListSide = 'right' }: Props)
           </div>
         </div>
         {data && (
-          <div className="mt-2 text-xs text-slate-400">
+          <div className="mt-2 text-xs text-sky-500">
             {data.trails.length} trails loaded
           </div>
         )}
@@ -55,7 +55,7 @@ export function MountainPane({ label, initial, trailListSide = 'right' }: Props)
       {/* Desktop: side panel layout */}
       <div className="flex-1 hidden md:flex min-h-0">
         {data && trailListSide === 'left' && (
-          <div className="bg-slate-800 border-r border-slate-700 overflow-y-auto">
+          <div className="bg-white border-r border-sky-200 overflow-y-auto">
             <TrailList trails={data.trails} onSelect={handleTrailSelect} selectedTrail={selectedTrail} />
           </div>
         )}
@@ -64,7 +64,7 @@ export function MountainPane({ label, initial, trailListSide = 'right' }: Props)
           {data ? (
             <MountainView3D data={data} focusTrail={focusTrail} onFocusHandled={() => setFocusTrail(null)} selectedTrail={selectedTrail} />
           ) : !loading && !error ? (
-            <div className="flex items-center justify-center h-full bg-slate-900 text-slate-500">
+            <div className="flex items-center justify-center h-full bg-sky-50 text-sky-400">
               <div className="text-center">
                 <div className="text-4xl mb-2">⛷</div>
                 <div className="text-sm">Search for a mountain above</div>
@@ -75,17 +75,17 @@ export function MountainPane({ label, initial, trailListSide = 'right' }: Props)
           {loading && <LoadingOverlay progress={progress} />}
 
           {error && (
-            <div className="flex items-center justify-center h-full bg-slate-900">
+            <div className="flex items-center justify-center h-full bg-sky-50">
               <div className="text-center p-4 max-w-xs">
-                <div className="text-red-400 text-sm mb-2">Error</div>
-                <div className="text-slate-300 text-xs">{error}</div>
+                <div className="text-red-500 text-sm mb-2">Error</div>
+                <div className="text-sky-700 text-xs">{error}</div>
               </div>
             </div>
           )}
         </div>
 
         {data && trailListSide === 'right' && (
-          <div className="bg-slate-800 border-l border-slate-700 overflow-y-auto">
+          <div className="bg-white border-l border-sky-200 overflow-y-auto">
             <TrailList trails={data.trails} onSelect={handleTrailSelect} selectedTrail={selectedTrail} />
           </div>
         )}
@@ -94,10 +94,10 @@ export function MountainPane({ label, initial, trailListSide = 'right' }: Props)
       {/* Mobile: top drawer + map */}
       <div className="flex-1 flex flex-col md:hidden min-h-0">
         {data && (
-          <div className={`bg-slate-800 border-b border-slate-700 transition-all duration-200 overflow-hidden ${drawerOpen ? 'max-h-48' : 'h-7'}`}>
+          <div className={`bg-white border-b border-sky-200 transition-all duration-200 overflow-hidden ${drawerOpen ? 'max-h-48' : 'h-7'}`}>
             <button
               onClick={() => setDrawerOpen(!drawerOpen)}
-              className="w-full flex items-center justify-center gap-1 h-7 text-xs text-slate-400 hover:text-slate-200"
+              className="w-full flex items-center justify-center gap-1 h-7 text-xs text-sky-500 hover:text-sky-700"
             >
               <span>{drawerOpen ? '▲' : '▼'}</span>
               <span>Trails ({data.trails.length})</span>
@@ -114,7 +114,7 @@ export function MountainPane({ label, initial, trailListSide = 'right' }: Props)
           {data ? (
             <MountainView3D data={data} focusTrail={focusTrail} onFocusHandled={() => setFocusTrail(null)} selectedTrail={selectedTrail} />
           ) : !loading && !error ? (
-            <div className="flex items-center justify-center h-full bg-slate-900 text-slate-500">
+            <div className="flex items-center justify-center h-full bg-sky-50 text-sky-400">
               <div className="text-center">
                 <div className="text-4xl mb-2">⛷</div>
                 <div className="text-sm">Search for a mountain above</div>
@@ -125,10 +125,10 @@ export function MountainPane({ label, initial, trailListSide = 'right' }: Props)
           {loading && <LoadingOverlay progress={progress} />}
 
           {error && (
-            <div className="flex items-center justify-center h-full bg-slate-900">
+            <div className="flex items-center justify-center h-full bg-sky-50">
               <div className="text-center p-4 max-w-xs">
-                <div className="text-red-400 text-sm mb-2">Error</div>
-                <div className="text-slate-300 text-xs">{error}</div>
+                <div className="text-red-500 text-sm mb-2">Error</div>
+                <div className="text-sky-700 text-xs">{error}</div>
               </div>
             </div>
           )}

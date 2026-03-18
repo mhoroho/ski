@@ -25,7 +25,7 @@ const difficultyColor: Record<string, string> = {
   advanced: 'text-black',
   expert: 'text-black',
   freeride: 'text-yellow-400',
-  unknown: 'text-slate-400',
+  unknown: 'text-sky-500',
 };
 
 type SortField = 'name' | 'peakSlope' | 'avgSlope' | 'maxSlope';
@@ -61,22 +61,22 @@ export function TrailList({ trails, onSelect, selectedTrail }: Props) {
   return (
     <div className="text-xs w-max">
       <table>
-        <thead className="sticky top-0 bg-slate-800">
-          <tr className="text-slate-400 text-left whitespace-nowrap">
-            <th className="py-0.5 px-1 cursor-pointer select-none hover:text-slate-200" onClick={() => handleSort('name')}>Trail{arrow('name')}</th>
-            <th className="py-0.5 px-1 text-right cursor-pointer select-none hover:text-slate-200" onClick={() => handleSort('peakSlope')}>Pk{arrow('peakSlope')}</th>
-            <th className="py-0.5 px-1 text-right cursor-pointer select-none hover:text-slate-200" onClick={() => handleSort('avgSlope')}>Av{arrow('avgSlope')}</th>
-            <th className="py-0.5 px-1 text-right cursor-pointer select-none hover:text-slate-200" onClick={() => handleSort('maxSlope')}>Mx{arrow('maxSlope')}</th>
+        <thead className="sticky top-0 bg-white">
+          <tr className="text-sky-500 text-left whitespace-nowrap">
+            <th className="py-0.5 px-1 cursor-pointer select-none hover:text-sky-700" onClick={() => handleSort('name')}>Trail{arrow('name')}</th>
+            <th className="py-0.5 px-1 text-right cursor-pointer select-none hover:text-sky-700" onClick={() => handleSort('peakSlope')}>Pk{arrow('peakSlope')}</th>
+            <th className="py-0.5 px-1 text-right cursor-pointer select-none hover:text-sky-700" onClick={() => handleSort('avgSlope')}>Av{arrow('avgSlope')}</th>
+            <th className="py-0.5 px-1 text-right cursor-pointer select-none hover:text-sky-700" onClick={() => handleSort('maxSlope')}>Mx{arrow('maxSlope')}</th>
           </tr>
         </thead>
         <tbody>
           {sorted.map((trail, i) => (
-            <tr key={i} className={`border-t border-slate-700/50 hover:bg-slate-700/30 cursor-pointer ${selectedTrail?.name === trail.name ? 'bg-slate-700/50' : ''}`} onClick={() => onSelect?.(trail)}>
+            <tr key={i} className={`border-t border-sky-200/50 hover:bg-sky-100 cursor-pointer ${selectedTrail?.name === trail.name ? 'bg-sky-100' : ''}`} onClick={() => onSelect?.(trail)}>
               <td className="py-0.5 px-1 flex items-center gap-0.5 whitespace-nowrap">
-                <span className={difficultyColor[trail.difficulty] || 'text-slate-400'}>
+                <span className={difficultyColor[trail.difficulty] || 'text-sky-500'}>
                   {difficultyIcon[trail.difficulty] || '?'}
                 </span>
-                <span className="text-white truncate max-w-[110px]">{trail.name}</span>
+                <span className="text-sky-900 truncate max-w-[110px]">{trail.name}</span>
               </td>
               <td className="py-0.5 px-1 text-right font-mono whitespace-nowrap" style={{ color: slopeToColor(trail.peakSlope) }}>
                 {trail.peakSlope.toFixed(0)}°

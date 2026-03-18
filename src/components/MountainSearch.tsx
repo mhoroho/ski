@@ -33,7 +33,7 @@ export function MountainSearch({ label, onSelect, selected }: Props) {
   return (
     <div ref={containerRef} className="relative">
       {label && (
-        <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+        <label className="block text-xs font-semibold text-sky-500 uppercase tracking-wider mb-1">
           {label}
         </label>
       )}
@@ -42,7 +42,7 @@ export function MountainSearch({ label, onSelect, selected }: Props) {
         type="text"
         value={query}
         placeholder={selected ? `${selected.name}, ${selected.state}` : 'Search mountains...'}
-        className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+        className="w-full px-3 py-2 bg-sky-50 border border-sky-300 rounded-lg text-sky-900 placeholder-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent text-sm"
         onChange={(e) => {
           setQuery(e.target.value);
           setOpen(true);
@@ -50,14 +50,14 @@ export function MountainSearch({ label, onSelect, selected }: Props) {
         onFocus={() => setOpen(true)}
       />
       {open && (
-        <div className="absolute z-[1000] mt-1 w-full max-h-64 overflow-y-auto bg-slate-800 border border-slate-600 rounded-lg shadow-xl">
+        <div className="absolute z-[1000] mt-1 w-full max-h-64 overflow-y-auto bg-white border border-sky-200 rounded-lg shadow-xl">
           {filtered.length === 0 ? (
-            <div className="px-3 py-2 text-slate-400 text-sm">No mountains found</div>
+            <div className="px-3 py-2 text-sky-400 text-sm">No mountains found</div>
           ) : (
             filtered.map((m) => (
               <button
                 key={`${m.name}-${m.state}`}
-                className="w-full text-left px-3 py-2 text-sm text-white hover:bg-slate-700 transition-colors"
+                className="w-full text-left px-3 py-2 text-sm text-sky-900 hover:bg-sky-50 transition-colors"
                 onClick={() => {
                   onSelect(m);
                   setQuery('');
@@ -66,7 +66,7 @@ export function MountainSearch({ label, onSelect, selected }: Props) {
                 }}
               >
                 <span className="font-medium">{m.name}</span>
-                <span className="text-slate-400 ml-1">{m.state}</span>
+                <span className="text-sky-500 ml-1">{m.state}</span>
               </button>
             ))
           )}
