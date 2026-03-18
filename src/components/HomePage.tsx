@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Mountain } from '../types';
 import { MOUNTAINS } from '../data/mountains';
+import { slopeToColor } from '../utils/color';
 
 interface Props {
   onSelectMountain: (mountain: Mountain) => void;
@@ -64,18 +65,29 @@ export function HomePage({ onSelectMountain }: Props) {
               {STATE_NAMES[state] || state}
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
-              {mountains.map((m) => (
-                <button
-                  key={m.slug}
-                  onClick={() => onSelectMountain(m)}
-                  className="bg-white border border-sky-200 rounded-lg p-3 text-left hover:border-sky-400 hover:shadow-md transition-all group"
-                >
-                  <div className="font-medium text-sm text-sky-900 group-hover:text-sky-700 truncate">
-                    {m.name}
-                  </div>
-                  <div className="text-xs text-sky-400 mt-0.5">{m.state}</div>
-                </button>
-              ))}
+              {mountains.map((m) => {
+                const color = slopeToColor(m.peakSlope ?? 0);
+                return (
+                  <button
+                    key={m.slug}
+                    onClick={() => onSelectMountain(m)}
+                    className="bg-white border border-sky-200 rounded-lg p-3 text-left hover:shadow-md transition-all group overflow-hidden"
+                    style={{ borderLeftWidth: 4, borderLeftColor: color }}
+                  >
+                    <div className="font-medium text-sm text-sky-900 group-hover:text-sky-700 truncate">
+                      {m.name}
+                    </div>
+                    <div className="flex items-center justify-between mt-0.5">
+                      <span className="text-xs text-sky-400">{m.state}</span>
+                      {m.peakSlope != null && (
+                        <span className="text-xs font-mono font-semibold" style={{ color }}>
+                          {m.peakSlope.toFixed(0)}°
+                        </span>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
         ))}

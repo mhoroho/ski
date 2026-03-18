@@ -5,6 +5,7 @@ export interface Mountain {
   lng: number;
   bbox: [number, number, number, number]; // [south, west, north, east]
   slug: string; // filename in public/trails/ (without .json)
+  peakSlope?: number; // steepest 100m window across all trails (degrees)
 }
 
 export interface TrailPoint {
